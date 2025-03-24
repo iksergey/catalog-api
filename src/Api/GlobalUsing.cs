@@ -12,3 +12,5 @@ global using FluentValidation;
 global using Microsoft.AspNetCore.Diagnostics;
 global using Microsoft.AspNetCore.Mvc;
 global using Api.Exceptions.Handler;
+
+global using Api.Exceptions;

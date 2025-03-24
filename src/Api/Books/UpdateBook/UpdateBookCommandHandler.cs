@@ -1,4 +1,3 @@
-
 namespace Api.Books.UpdateBook;
 
 public record UpdateBookCommand(
@@ -26,7 +25,7 @@ public class UpdateBookCommandHandler(IDocumentSession session)
 
         if (book is null)
         {
-            throw new Exception();
+            throw new BookNotFoundException(command.Id);
         }
 
         command.Adapt(book);
