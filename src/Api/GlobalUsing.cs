@@ -9,3 +9,6 @@ global using Mapster;
 global using Marten.Pagination;
 global using Api.Behaviors;
 global using FluentValidation;
+global using Microsoft.AspNetCore.Diagnostics;
+global using Microsoft.AspNetCore.Mvc;
+global using Api.Exceptions.Handler;
