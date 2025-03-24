@@ -6,3 +6,4 @@ global using Api.Data.Seed;
 global using Carter;
 global using Api.CQRS;
 global using Mapster;
+global using Marten.Pagination;
