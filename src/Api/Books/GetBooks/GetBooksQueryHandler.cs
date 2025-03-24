@@ -11,6 +11,7 @@ internal class GetBooksQueryHandler(IDocumentSession session)
     public async Task<GetBooksResult> Handle(GetBooksQuery query,
     CancellationToken cancellationToken)
     {
+        await Task.Delay(TimeSpan.FromSeconds(5));
         var books = await session.Query<Book>()
             // .ToListAsync(cancellationToken);
             .ToPagedListAsync(query.PageNumber ?? 1, query.PageSize ?? 5, cancellationToken);
