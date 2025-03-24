@@ -7,3 +7,5 @@ global using Carter;
 global using Api.CQRS;
 global using Mapster;
 global using Marten.Pagination;
+global using Api.Behaviors;
+global using FluentValidation;

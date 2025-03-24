@@ -9,6 +9,15 @@ public record AppendBookCommand(
     List<string> Category
 ) : ICommand<AppendBookResult>;
 
+public class AppendBookCommandValidator : AbstractValidator<AppendBookCommand>
+{
+    public AppendBookCommandValidator()
+    {
+        RuleFor(item => item.Title).NotEmpty().WithMessage("Title не может быть пустым");
+        RuleFor(item => item.Price).GreaterThan(0).WithMessage("Price должен быть больше 0");
+    }
+}
+
 public record AppendBookResult(Guid Id);
 
 public class AppendBookCommandHandler(IDocumentSession session)

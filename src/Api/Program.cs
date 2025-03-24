@@ -6,10 +6,15 @@ builder.Services.AddMarten(option =>
     option.Connection(connectionString);
 }).UseLightweightSessions().InitializeWith<InitializeBookDatabase>();
 
+var assembly = typeof(Program).Assembly;
+
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
 });
+
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddCarter();
 
