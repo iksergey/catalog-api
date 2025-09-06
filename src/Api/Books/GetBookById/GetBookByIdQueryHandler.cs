@@ -5,6 +5,18 @@ public record GetBookByIdQuery(string Id)
 
 public record GetBookByIdResult(Book Item);
 
+public class GetBookByIdQueryValidator : AbstractValidator<GetBookByIdQuery>
+{
+    public GetBookByIdQueryValidator()
+    {
+        RuleFor(x => x.Id)
+            .NotEmpty().WithMessage("Id не может быть пустым")
+            .Must(id => Guid.TryParse(id, out _))
+            .WithMessage("Id должен быть валидным GUID");
+    }
+}
+
+
 internal class GetBookByIdQueryHandler(IDocumentSession session)
     : IQueryHandler<GetBookByIdQuery, GetBookByIdResult>
 {
@@ -12,11 +24,6 @@ internal class GetBookByIdQueryHandler(IDocumentSession session)
         CancellationToken cancellationToken)
     {
         var isSuccess = Guid.TryParse(query.Id, out var id);
-
-        if (!isSuccess)
-        {
-            throw new ValidationException("Всё плохо");
-        }
 
         var book = await session.LoadAsync<Book>(id, cancellationToken);
 
